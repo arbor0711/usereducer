@@ -4,7 +4,7 @@ function reducer(state, action) {
   switch (action.type) {
     case "increment-age": {
       return {
-        name: "state.name",
+        name: state.name,
         age: state.age + 1,
       };
     }
