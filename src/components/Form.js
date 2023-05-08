@@ -8,6 +8,12 @@ function reducer(state, action) {
         age: state.age + 1,
       };
     }
+    case "decrement-age": {
+      return {
+        name: state.name,
+        age: state.age - 1,
+      };
+    }
     case "change-name":
       {
         return {
@@ -24,8 +30,11 @@ const initialState = { name: "Alireza", age: 36 };
 function Form() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function handleButtonClick() {
+  function incrementButton() {
     dispatch({ type: "increment-age" });
+  }
+  function DecrementButton() {
+    dispatch({ type: "decrement-age" });
   }
 
   function handleInputChange(e) {
@@ -38,7 +47,8 @@ function Form() {
   return (
     <>
       <input value={state.name} onChange={handleInputChange} />
-      <button onClick={handleButtonClick}>Increment age</button>
+      <button onClick={incrementButton}>Increment age</button>
+      <button onClick={DecrementButton}>Decrement age</button>
       <p>
         Hello, My name is {state.name} and I have {state.age} years old
       </p>
