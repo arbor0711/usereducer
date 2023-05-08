@@ -14,11 +14,17 @@ function reducer(state, action) {
         age: state.age - 1,
       };
     }
-    case "change-name":
+    case "change-name": {
+      return {
+        name: action.nextName,
+        age: state.age,
+      };
+    }
+    case "change-age":
       {
         return {
-          name: action.nextName,
-          age: state.age,
+          age: action.nextAge,
+          name: state.name,
         };
       }
       throw Error("Unknown action: " + action.type);
@@ -37,7 +43,14 @@ function Form() {
     dispatch({ type: "decrement-age" });
   }
 
-  function handleInputChange(e) {
+  function ageInputChange(e) {
+    dispatch({
+      type: "change-age",
+      nextAge: e.target.value,
+    });
+  }
+
+  function nameInputChange(e) {
     dispatch({
       type: "change-name",
       nextName: e.target.value,
@@ -46,8 +59,14 @@ function Form() {
 
   return (
     <>
-      <input value={state.name} onChange={handleInputChange} />
+      <input value={state.name} onChange={nameInputChange} />
+      <br />
       <button onClick={incrementButton}>Increment age</button>
+      <input
+        value={state.age}
+        style={{ maxWidth: "50px" }}
+        onChange={ageInputChange}
+      />
       <button onClick={DecrementButton}>Decrement age</button>
       <p>
         Hello, My name is {state.name} and I have {state.age} years old
