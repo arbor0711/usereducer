@@ -13,7 +13,7 @@ switch(action.type){
     case 'LOGGED_IN':
         return {...state, isLoggedIn:true}
     case 'LOGGED_OUT':
-        return {...action, isLoggedIn:false, username:'', password:''}
+        return {...state, isLoggedIn:false, username:'', password:''}
     case 'IS_LOADING':
         return{...state, isLoading: true}
     case 'IS_NOT_LOADING':
