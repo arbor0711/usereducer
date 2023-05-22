@@ -1,56 +1,52 @@
 import { useReducer } from "react";
 
-const reducer = (prevState, action) => {
+const reducer = (state, action)=>{
   let array;
-  switch (action.type) {
-    case "ADD":
-      array = [...prevState];
-      array.push(action.payload);
-      return array;
-    case "REMOVE":
-      array = [...prevState];
-      array.pop();
-      return array;
-    case "CLEAR":
-      return (prevState = []);
-    default:
-      break;
+  switch(action.type){
+    case 'ADD':
+      array=[...state]
+      array.push(action.payload)
+      return array
+    case 'REMOVE':
+      array=[...state]
+      array.pop()
+      return array
+    case 'CLEAR':
+      return array=[]
+    default : break
   }
-};
+}
 
-const MultipleStates = (props) => {
-  const [state, dispatch] = useReducer(reducer, ["initial value"]);
-  console.log(state);
+const MultipleStates=(props)=>{
 
-  const addHandler = () => {
-    dispatch({ type: "ADD", payload: Math.round(Math.random() * 100 + 100) });
-  };
+  const [state, dispatch]= useReducer(reducer, ['Zero item'])
 
-  const removeHandler = () => {
-    dispatch({ type: "REMOVE" });
-  };
+  const addToCardHandler=()=>{
+    dispatch({type:'ADD', payload: Math.round(Math.random()*100+100)})
+  }
 
-  const clearHandler = () => {
-    dispatch({ type: "CLEAR" });
-  };
+  const removeFromCard=()=>{
+    dispatch({type:'REMOVE'})
+  }
+
+  const clearAll=()=>{
+    dispatch({type:'CLEAR'})
+  }
 
   return (
     <>
-      <hr />
-      <h2>useReducer use case</h2>
-      <h3>Manage multiple state: modify an array</h3>
-      <button onClick={addHandler}>Add random value to array</button>
-      <button onClick={removeHandler}>Remove last value from array</button>
-      <button onClick={clearHandler}>Clear array</button>
-      <p>Shopping cart array:</p>
-      <p>
-        <b>
-          {state.length === 0 && "(empty)"}
-          {state.join("-")}
-        </b>
-      </p>
+      <h1>Your shopping card</h1>
+      <h2>Shopping card is :{(state.length === 0) ? 'empty' : 'ready fot payment'}</h2>
+      <button onClick={addToCardHandler} >Add random item to card</button>
+      <button onClick={removeFromCard} >Remove the last item from card</button>
+      <button onClick={clearAll} >Clear the list</button>
+      <p><b>
+        Your shopping card includes: 
+        {state.length === 0 && 'empty'}
+        {state.join("-")}
+      </b></p>
     </>
-  );
-};
+  )
+}
 
-export default MultipleStates;
+export default MultipleStates
