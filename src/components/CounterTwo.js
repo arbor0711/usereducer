@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 
 const reducer = (state, action) => {
-  switch (action.type) {
+  switch (action) {
     case "INCREMENT":
       return state + 1;
     case "DECREMENT":
@@ -18,23 +18,32 @@ const initialValue = 0;
 
 function CounterTwo() {
   const [state, dispatch] = useReducer(reducer, initialValue);
-  const Increment = () => {
-    dispatch({ type: "INCREMENT" });
-  };
-  const Decrement = () => {
-    dispatch({ type: "DECREMENT" });
-  };
-  const Reset = () => {
-    dispatch({ type: "RESET" });
-  };
 
   return (
     <div>
       <h2>useReducer</h2>
       <p>{state}</p>
-      <button onClick={Increment}>Increment</button>
-      <button onClick={Decrement}>Decrement`</button>
-      <button onClick={Reset}>Reset</button>
+      <button
+        onClick={() => {
+          dispatch("INCREMENT");
+        }}
+      >
+        Increment
+      </button>
+      <button
+        onClick={() => {
+          dispatch("DECREMENT");
+        }}
+      >
+        Decrement`
+      </button>
+      <button
+        onClick={() => {
+          dispatch("RESET");
+        }}
+      >
+        Reset
+      </button>
     </div>
   );
 }
